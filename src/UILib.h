@@ -13,10 +13,13 @@ public:
 	WINDOW_INFO win;
 	//GLFWのハンドル
 	GLFWwindow *GLhwnd;
+	//フラグ
+		//終了フラグ
+		bool f_exit;
 
 //関数宣言
 	//初期化関数
-	bool init(int *argc, char *argv[]);
+	void init(int *argc, char *argv[]);
 	//ウィンドウとビューポートを同期
 	void resize();
 	//ループ関数

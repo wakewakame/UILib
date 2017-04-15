@@ -1,9 +1,13 @@
 #include "UILib.h"
 
-bool UILib::init(int *argc, char *argv[]) {
+void UILib::init(int *argc, char *argv[]) {
+	//変数初期化
+	f_exit = 0;
+
 	//GLFW初期化
 	if (glfwInit() == GL_FALSE) {
-		return 1;
+		f_exit = 1;
+		return;
 	}
 	
 	// ウィンドウ生成
@@ -22,8 +26,8 @@ bool UILib::init(int *argc, char *argv[]) {
 	//ウィンドウが生成されていなければ終了
 	if (win.hwnd == NULL)
 	{
-		exit();
-		return 1;
+		f_exit = 1;
+		return;
 	}
 	
 	//生成したウィンドウをOpenGLの処理対象にする
@@ -35,10 +39,11 @@ bool UILib::init(int *argc, char *argv[]) {
 
 	//ウィンドウとビューポートの同期
 	resize();
-	return 0;
+	return;
 }
 
 void UILib::resize() {
+	if (f_exit) return;
 	//ウィンドウ全体をビューポートにする
 	glViewport(0, 0, win.size.x, win.size.y);
 
@@ -50,6 +55,7 @@ void UILib::resize() {
 }
 
 void UILib::loop() {
+	if (f_exit) return;
 	//ウィンドウが開いている間繰り返す
 	while (glfwWindowShouldClose(GLhwnd) == GL_FALSE)
 	{
