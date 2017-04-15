@@ -94,5 +94,6 @@ void UILib::loop() {
 }
 
 void UILib::exit() {
+	//GLFWÇÃèIóπ
 	glfwTerminate();
 }
