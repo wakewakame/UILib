@@ -28,10 +28,11 @@ void UILib::init() {
 	if (error(glfwInit() == GL_FALSE)) return;
 
 	//OpenGL Version 3.2 Core Profile を選択する
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+	//glfwWindowHint(GLFW_SAMPLES, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
 	//ウィンドウ生成
 	GLhwnd = glfwCreateWindow
@@ -56,17 +57,24 @@ void UILib::init() {
 	glewExperimental = GL_TRUE;
 	if (error(glewInit() != GLEW_OK)) return;
 	
-	//ブレンドモード有効化
+	//デフォルトでブレンドモード有効化
 	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); //アルファブレンド適用
 
-	//アルファブレンド適用
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//デフォルトでアンチエイリアス適応
+	glHint(GL_POINT_SMOOTH_HINT, GL_NICEST); //点のアンチエイリアス精度最大化
+	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST); //線のアンチエイリアス精度最大化
+	glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST); //面のアンチエイリアス精度最大化
+	glEnable(GL_POINT_SMOOTH); //点
+	glEnable(GL_LINE_SMOOTH); //線
+	glEnable(GL_POLYGON_SMOOTH); //面
 
 	//ウィンドウとビューポートの同期
 	resize();
 
 	//垂直同期のタイミングを待つ
 	glfwSwapInterval(1);
+
 	return;
 }
 
@@ -76,10 +84,7 @@ void UILib::loop() {
 	while (glfwWindowShouldClose(GLhwnd) == GL_FALSE)
 	{
 		//イベントが発生するまで待機
-		//glfwWaitEventsTimeout(0.7);
 		glfwPollEvents();
-		//glfwWaitEvents();
-		//SetTimer(win.hwnd, NULL, 1000.0 / win.fps, NULL);
 
 		//画面初期化
 		glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
@@ -96,25 +101,31 @@ void UILib::loop() {
 void UILib::render() {
 	static int a = 50;
 	a = (a + 1) % 100;
+
+	glLineWidth(10);
 	glColor4d(0.0, 1.0, 1.0, 1.0);
 	glBegin(GL_QUADS);
 	glVertex2d(0.0, 0.0);
 	glVertex2d(100.0, 0.0);
 	glVertex2d(100.0, 100.0);
-	glVertex2d(0.0, 100.0);
+	glVertex2d(0.0, 70.0);
 	glEnd();
 	glColor4d(1.0, 0.0, 0.0, 0.5);
-	glBegin(GL_QUADS);
+	glBegin(GL_LINES);
 	glVertex2d(10.0 + (double)a, 10.0);
 	glVertex2d(90.0 + (double)a, 10.0);
 	glVertex2d(90.0 + (double)a, 90.0);
-	glVertex2d(10.0 + (double)a, 90.0);
+	glVertex2d(10.0 + (double)a, 20.0);
 	glEnd();
 	glFlush();
+
+	return;
 }
 
 void UILib::exit() {
 	if (f_exit) return;
 	//GLFWの終了
 	glfwTerminate();
+
+	return;
 }

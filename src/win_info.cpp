@@ -69,7 +69,7 @@ WINDOW_INFO::WINDOW_INFO() {
 	hwnd = nullptr; //OpenGLの生成ウィンドウのハンドル
 	fps = 30.0; //ウィンドウの描画フレームレート
 	speed = 60.0 / fps; //60fpsを基準としたアニメーションのフレーム間の移動速度の倍率
-	title = "";
+	title = "UILib";
 }
 
 void WINDOW_INFO::loop() {

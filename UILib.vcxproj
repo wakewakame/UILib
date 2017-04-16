@@ -148,10 +148,13 @@
     <ClCompile Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\main.cpp" />
     <ClCompile Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\UILib.cpp" />
     <ClCompile Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\win_info.cpp" />
+    <ClCompile Include="src\shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="src\FragmentShader.fragmentshader" />
     <None Include="src\point.frag" />
+    <None Include="src\VertexShader.vertexshader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
