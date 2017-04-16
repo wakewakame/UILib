@@ -104,12 +104,14 @@ void UILib::render() {
 
 	glLineWidth(10);
 	glColor4d(0.0, 1.0, 1.0, 1.0);
+	glDisable(GL_POLYGON_SMOOTH);
 	glBegin(GL_QUADS);
 	glVertex2d(0.0, 0.0);
 	glVertex2d(100.0, 0.0);
 	glVertex2d(100.0, 100.0);
 	glVertex2d(0.0, 70.0);
 	glEnd();
+	glEnable(GL_POLYGON_SMOOTH);
 	glColor4d(1.0, 0.0, 0.0, 0.5);
 	glBegin(GL_LINES);
 	glVertex2d(10.0 + (double)a, 10.0);
