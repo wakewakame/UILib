@@ -89,7 +89,7 @@ void UILib::loop() {
 		glfwPollEvents();
 
 		//イベント処理等
-		win.loop();
+		win.b_loop();
 
 		//画面初期化
 		glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
@@ -100,6 +100,9 @@ void UILib::loop() {
 
 		//カラーバッファを入れ替える
 		glfwSwapBuffers(GLhwnd);
+
+		//待機処理等
+		win.a_loop();
 	}
 
 }
