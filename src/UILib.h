@@ -6,6 +6,7 @@
 #include <iostream>
 #include <Windows.h>
 #include "win_info.h"
+#include "Frame.h"
 
 class UILib {
 private:
@@ -14,6 +15,8 @@ private:
 	WINDOW_INFO win;
 	//GLFWのハンドル
 	GLFWwindow *GLhwnd;
+	//フレーム管理クラス
+	Frame frm;
 	//フラグ
 		//終了フラグ
 		bool f_exit;
@@ -52,4 +55,7 @@ UIを配置していくこともある
 or
 それが難しそうなら現在のフレームレートを取得する方法
 を調べ、実装
+
+-メモ3-
+フレームマネジメントクラスの作成(もっと単純できれいな方法があればそっち)
 */

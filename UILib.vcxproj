@@ -143,18 +143,28 @@
     <ClInclude Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\define.h" />
     <ClInclude Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\UILib.h" />
     <ClInclude Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\win_info.h" />
+    <ClInclude Include="src\Animation.h" />
+    <ClInclude Include="src\FBO.h" />
+    <ClInclude Include="src\fps.h" />
+    <ClInclude Include="src\Frame.h" />
+    <ClInclude Include="src\GraphPara.h" />
+    <ClInclude Include="src\mouse.h" />
+    <ClInclude Include="src\UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\main.cpp" />
     <ClCompile Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\UILib.cpp" />
     <ClCompile Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\win_info.cpp" />
-    <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\Animation.cpp" />
+    <ClCompile Include="src\FBO.cpp" />
+    <ClCompile Include="src\fps.cpp" />
+    <ClCompile Include="src\Frame.cpp" />
+    <ClCompile Include="src\GraphPara.cpp" />
+    <ClCompile Include="src\mouse.cpp" />
+    <ClCompile Include="src\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="src\FragmentShader.fragmentshader" />
-    <None Include="src\point.frag" />
-    <None Include="src\VertexShader.vertexshader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -28,8 +28,8 @@ void UILib::init() {
 	if (error(glfwInit() == GL_FALSE)) return;
 
 	//OpenGL Version 3.2 Core Profile を選択する
-	//glfwWindowHint(GLFW_SAMPLES, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_SAMPLES, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
@@ -79,12 +79,17 @@ void UILib::init() {
 }
 
 void UILib::loop() {
+	//エラー確認
 	if (f_exit) return;
+
 	//ウィンドウが開いている間繰り返す
 	while (glfwWindowShouldClose(GLhwnd) == GL_FALSE)
 	{
 		//イベントが発生するまで待機
 		glfwPollEvents();
+
+		//イベント処理等
+		win.loop();
 
 		//画面初期化
 		glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
@@ -96,11 +101,12 @@ void UILib::loop() {
 		//カラーバッファを入れ替える
 		glfwSwapBuffers(GLhwnd);
 	}
+
 }
 
 void UILib::render() {
 	static int a = 50;
-	a = (a + 1) % 100;
+	a = (a + (int)(1.0 * fps.GetSpeed())) % 100;
 
 	glLineWidth(10);
 	glColor4d(0.0, 1.0, 1.0, 1.0);
