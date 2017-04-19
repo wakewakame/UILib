@@ -24,6 +24,9 @@ public:
 	std::string title; //ウィンドウタイトル
 
 //関数宣言
+	//WINDOW_INFOのインスタンス取得関数
+	static WINDOW_INFO *get_instance(GLFWwindow *const window);
+
 	//GLウィンドウハンドル設定関数
 	void set_GLhwnd(GLFWwindow *set_gl_hwnd);
 

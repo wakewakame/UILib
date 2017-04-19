@@ -1,4 +1,5 @@
 #include "mouse.h"
+#include "win_info.h"
 
 MOUSE::MOUSE() {
 //変数初期化
@@ -22,9 +23,6 @@ MOUSE::MOUSE() {
 void MOUSE::SetGLhwnd(GLFWwindow *set_gl_hwnd) {
 	//代入
 	gl_hwnd = set_gl_hwnd;
-
-	//コールバック関数用自クラスのポインタ指定
-	glfwSetWindowUserPointer(gl_hwnd, this); //コールバック関数用this代入
 
 	//マウスホイールイベント取得
 	glfwSetScrollCallback(gl_hwnd, get_wheel);
@@ -101,6 +99,6 @@ void MOUSE::get_event() {
 }
 
 void MOUSE::get_wheel(GLFWwindow *const window, double x, double y) {
-	((MOUSE*)glfwGetWindowUserPointer(window))->wheel_flag = 1;
-	((MOUSE*)glfwGetWindowUserPointer(window))->wheel += y;
+	WINDOW_INFO::get_instance(window)->mouse.wheel_flag = 1;
+	WINDOW_INFO::get_instance(window)->mouse.wheel += y;
 }

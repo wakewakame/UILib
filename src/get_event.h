@@ -13,4 +13,7 @@ public:
 //関数初期化
 	//GLウィンドウハンドル設定関数
 	virtual void SetGLhwnd(GLFWwindow *set_gl_hwnd);
+
+	//コンストラクタ
+	GET_EVENT();
 };
