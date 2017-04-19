@@ -93,9 +93,17 @@ struct GraphPos {
 };
 
 //ウィンドウ上の座標
-struct WindowPos {
-	int x;
-	int y;
+struct WindowPoint {
+	double x;
+	double y;
+};
+
+//ウィンドウ上のサイズ
+struct WindowRect {
+	double left;
+	double top;
+	double right;
+	double bottom;
 };
 
 //グラフのプロパティ

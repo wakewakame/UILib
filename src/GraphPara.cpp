@@ -127,8 +127,8 @@ const int GraphPara::get_y_dim() {
 	return y_dim;
 }
 
-const POINT GraphPara::get_pos(int index) {
-	POINT pos;
+const WindowPoint GraphPara::get_pos(int index) {
+	WindowPoint pos;
 	if (get_active() == index) {
 		if (x_dim != -1) {
 			if (mouse.x < f->pos.left) {
@@ -184,7 +184,7 @@ const POINT GraphPara::get_pos(int index) {
 	return pos;
 }
 
-void GraphPara::set_pos(WindowPos pos, int index) {
+void GraphPara::set_pos(WindowPoint pos, int index) {
 	if (x_dim != -1) {
 		param[x_dim].val[index] = percent(
 			(float)pos.x,
@@ -205,7 +205,7 @@ void GraphPara::set_pos(WindowPos pos, int index) {
 	}
 }
 
-const bool GraphPara::hit(RECT area, WindowPos pos) {
+const bool GraphPara::hit(WindowRect area, WindowPoint pos) {
 	if (
 		(area.left <= pos.x) &&
 		(area.top <= pos.y) &&
@@ -216,16 +216,16 @@ const bool GraphPara::hit(RECT area, WindowPos pos) {
 	}
 	return 0;
 }
-const bool GraphPara::hit(POINT center, POINT size, WindowPos pos) {
+const bool GraphPara::hit(WindowPoint center, WindowPoint size, WindowPoint pos) {
 	return hit({
-		center.x - size.x / 2,
-		center.y - size.y / 2,
-		center.x + size.x / 2,
-		center.y + size.y / 2
+		center.x - size.x / 2.0,
+		center.y - size.y / 2.0,
+		center.x + size.x / 2.0,
+		center.y + size.y / 2.0
 	}, pos);
 }
 
-void GraphPara::seek(int index, WindowPos n_mouse, bool l_click, bool b_l_click, POINT size) {
+void GraphPara::seek(int index, WindowPoint n_mouse, bool l_click, bool b_l_click, WindowPoint size) {
 	mouse = n_mouse;
 	if (hit(get_pos(index), size, n_mouse) && (!b_l_click) && l_click && get_active() == -1) {
 		set_active(index);

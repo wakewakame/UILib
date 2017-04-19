@@ -5,15 +5,15 @@ void Frame::reset() {
 	root = nullptr; //rootフレームのポインタ
 	parent = nullptr; //親フレームのポインタ
 	index = 0;//同フレーム内の自フレームの割当番号(=0,1,2,3,...)
-	pos = { 0,0,0,0 }; //フレーム座標
-	size = { 0, 0 }; //フレームサイズ(末端フレームのみ代入)
+	pos = { 0.0,0.0,0.0,0.0 }; //フレーム座標
+	size = { 0.0, 0.0 }; //フレームサイズ(末端フレームのみ代入)
 	name = ""; //フレームの名称
 	description = ""; //フレーム内のUIの解説
 	mode = 0; //子フレームが縦並び=0,横並び=1
-	gap = 0; //子フレーム間同士の隙間(px単位)
-	length = 0; //全フレームが初期値サイズ時の自フレームのサイズ
+	gap = 0.0; //子フレーム間同士の隙間(px単位)
+	length = 0.0; //全フレームが初期値サイズ時の自フレームのサイズ
 	lock = 0; //各子フレームの長さ(mode=0なら縦幅,mode=1なら横幅)の固定on/off
-	lock_length = 0; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
+	lock_length = 0.0; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
 	return;
 }
 
@@ -87,9 +87,9 @@ void Frame::resize(){
 						childs[i]->pos.left +
 						Utility::Proportion(
 							childs[i]->length,
-							0,
+							0.0,
 							length - lock_length,
-							0,
+							0.0,
 							size.x - lock_length
 						);
 				}
@@ -125,9 +125,9 @@ void Frame::resize(){
 						childs[i]->pos.top +
 						Utility::Proportion(
 							childs[i]->length,
-							0,
+							0.0,
 							length - lock_length,
-							0,
+							0.0,
 							size.y - lock_length
 						);
 				}
@@ -147,8 +147,8 @@ void Frame::draw() {
 
 void Frame::get_length() {
 	if (childs.size() != 0) {
-		length = 0; //全子フレームと全gapの和
-		lock_length = 0; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
+		length = 0.0; //全子フレームと全gapの和
+		lock_length = 0.0; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
 		//子フレームの個数分ループ
 		for (int i = 0; i < childs.size(); i++) {
 			//子フレームが子フレームを持っていた場合、再帰
@@ -163,8 +163,8 @@ void Frame::get_length() {
 			}
 		}
 		//全gapを足す
-		length += gap * (childs.size() + 1);
-		lock_length += gap * (childs.size() + 1);
+		length += gap * (double)(childs.size() + 1);
+		lock_length += gap * (double)(childs.size() + 1);
 	}
 	return;
 }
@@ -196,8 +196,8 @@ Frame::Frame(Frame *set_parent) {
 	name = ""; //フレームの名称
 	description = ""; //フレーム内のUIの解説
 	mode = 0; //子フレームが縦並び=0,横並び=1
-	gap = 0; //子フレーム間同士の隙間(px単位)
-	length = 100; //全フレームが初期値サイズ時の自フレームのサイズ
+	gap = 0.0; //子フレーム間同士の隙間(px単位)
+	length = 100.0; //全フレームが初期値サイズ時の自フレームのサイズ
 	lock = 0; //各子フレームの長さ(mode=0なら縦幅,mode=1なら横幅)の固定on/off
 
 	when_create();

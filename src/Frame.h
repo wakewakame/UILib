@@ -27,15 +27,15 @@ public:
 	Frame *parent; //親フレームのポインタ
 	std::vector<Frame*> childs; //全子フレームのポインタ配列
 	int index;//同フレーム内の自フレームの割当番号(=0,1,2,3,...)
-	RECT pos; //フレーム座標
-	POINT size; //フレームサイズ(末端フレームのみ代入)
+	WindowRect pos; //フレーム座標
+	WindowPoint size; //フレームサイズ(末端フレームのみ代入)
 	std::string name; //フレームの名称
 	std::string description; //フレーム内のUIの解説
 	bool mode; //子フレームが縦並び=0,横並び=1
-	int gap; //子フレーム間同士の隙間(px単位)
-	int length; //全フレームが初期値サイズ時の自フレームのサイズ
+	double gap; //子フレーム間同士の隙間(px単位)
+	double length; //全フレームが初期値サイズ時の自フレームのサイズ
 	bool lock; //各子フレームの長さ(mode=0なら縦幅,mode=1なら横幅)の固定on/off
-	int lock_length; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
+	double lock_length; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
 	WINDOW_INFO *win;
 
 	//関数宣言

@@ -115,7 +115,8 @@ void UILib::loop() {
 void UILib::render() {
 	static int a = 50;
 	a = (a + (int)(1.0 * win.fps.GetSpeed())) % 100;
-	std::cout << win.fps.GetLoad() << "%" << std::endl;
+	//std::cout << win.fps.GetLoad() << "%" << std::endl;
+	std::cout << win.mouse.wheel << std::endl;
 
 	glLineWidth(10);
 	glColor4d(0.0, 1.0, 1.0, 1.0);

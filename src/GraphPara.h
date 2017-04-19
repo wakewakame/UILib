@@ -15,7 +15,7 @@ class GraphPara {
 private:
 	std::vector<Dimension> param; //各次元のパラメータ配列
 	int active; //現在アクティブなパラメータのインデックス
-	WindowPos mouse; //現在のマウス座標
+	WindowPoint mouse; //現在のマウス座標
 	Frame *f; //使用するフレームのポインタ
 	int x_dim; //ウィンドウx座標に対応する次元番号
 	int y_dim; //ウィンドウy座標に対応する次元番号
@@ -66,14 +66,14 @@ public:
 	//ウィンドウのy座標に対応する次元数の取得
 	const int get_y_dim();
 	//フレーム座標変換関数
-	const POINT get_pos(int index);
+	const WindowPoint get_pos(int index);
 	//パラメータ座標変換関数
-	void set_pos(WindowPos pos, int index);
+	void set_pos(WindowPoint pos, int index);
 	//指定範囲内に指定地が存在するかどうかを判定する関数
-	const bool hit(RECT area, WindowPos pos);
-	const bool hit(POINT center, POINT size, WindowPos pos);
+	const bool hit(WindowRect area, WindowPoint pos);
+	const bool hit(WindowPoint center, WindowPoint size, WindowPoint pos);
 	//ドラッグ時マウス追従関数
-	void seek(int index, WindowPos n_mouse, bool l_click, bool b_l_click, POINT size);
+	void seek(int index, WindowPoint n_mouse, bool l_click, bool b_l_click, WindowPoint size);
 	//パラメータ変更時関数関数
 	void limiter(int index);
 };
