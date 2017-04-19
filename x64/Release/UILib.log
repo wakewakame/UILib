@@ -21,9 +21,11 @@ src\GraphPara.cpp(115): warning C4244: '=': 'double' から 'int' への変換�
 src\GraphPara.cpp(118): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
   mouse.cpp
 c:\users\大輝\dropbox\c++\uilib\uilib\src\define.h(85): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-  コード生成しています。
-  12 of 138 functions ( 8.7%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    7 functions had inline decision re-evaluated but remain unchanged
-  コード生成が終了しました。
-  UILib.vcxproj -> C:\Users\大輝\Dropbox\C++\UILib\x64\Release\UILib.exe
+c:\users\大輝\dropbox\c++\uilib\uilib\src\win_info.h(22): error C3646: 'mouse': 不明なオーバーライド指定子です
+c:\users\大輝\dropbox\c++\uilib\uilib\src\win_info.h(22): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+src\mouse.cpp(101): error C2039: 'mouse': 'WINDOW_INFO' のメンバーではありません。
+  c:\users\大輝\dropbox\c++\uilib\uilib\src\win_info.h(12): note: 'WINDOW_INFO' の宣言を確認してください
+src\mouse.cpp(101): error C2228: '.wheel_flag' の左側はクラス、構造体、共用体でなければなりません
+src\mouse.cpp(102): error C2039: 'mouse': 'WINDOW_INFO' のメンバーではありません。
+  c:\users\大輝\dropbox\c++\uilib\uilib\src\win_info.h(12): note: 'WINDOW_INFO' の宣言を確認してください
+src\mouse.cpp(102): error C2228: '.wheel' の左側はクラス、構造体、共用体でなければなりません
