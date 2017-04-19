@@ -35,23 +35,22 @@ void UILib::init() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
 	//ウィンドウ生成
-	GLhwnd = glfwCreateWindow
-	(
-		win.size.x,
-		win.size.y,
-		win.title.c_str(),
-		NULL,
-		NULL
+	win.set_GLhwnd(
+		glfwCreateWindow
+			(
+				win.size.x,
+				win.size.y,
+				win.title.c_str(),
+				NULL,
+				NULL
+			)
 	);
-	
-	//ウィンドウハンドル取得
-	win.hwnd = (HWND)GLhwnd;
 	
 	//ウィンドウが生成されていなければ終了
 	if (error(win.hwnd == NULL)) return;
 	
 	//生成したウィンドウをOpenGLの処理対象にする
-	glfwMakeContextCurrent(GLhwnd);
+	glfwMakeContextCurrent(win.gl_hwnd);
 
 	//GLEW初期化
 	glewExperimental = GL_TRUE;
@@ -69,11 +68,17 @@ void UILib::init() {
 	glEnable(GL_LINE_SMOOTH); //線
 	glEnable(GL_POLYGON_SMOOTH); //面
 
-	//ウィンドウとビューポートの同期
+	//ウィンドウとビューポートの座標単位同期
 	resize();
 
 	//垂直同期のタイミングを待つ
 	glfwSwapInterval(1);
+
+	//フレームレート設定
+	win.fps.SetFPS(30);
+
+	//rootフレーム初期化
+	window.win = &win;
 
 	return;
 }
@@ -83,7 +88,7 @@ void UILib::loop() {
 	if (f_exit) return;
 
 	//ウィンドウが開いている間繰り返す
-	while (glfwWindowShouldClose(GLhwnd) == GL_FALSE)
+	while (glfwWindowShouldClose(win.gl_hwnd) == GL_FALSE)
 	{
 		//イベントが発生するまで待機
 		glfwPollEvents();
@@ -99,7 +104,7 @@ void UILib::loop() {
 		render();
 
 		//カラーバッファを入れ替える
-		glfwSwapBuffers(GLhwnd);
+		glfwSwapBuffers(win.gl_hwnd);
 
 		//待機処理等
 		win.a_loop();
@@ -109,7 +114,8 @@ void UILib::loop() {
 
 void UILib::render() {
 	static int a = 50;
-	a = (a + (int)(1.0 * fps.GetSpeed())) % 100;
+	a = (a + (int)(1.0 * win.fps.GetSpeed())) % 100;
+	std::cout << win.fps.GetLoad() << "%" << std::endl;
 
 	glLineWidth(10);
 	glColor4d(0.0, 1.0, 1.0, 1.0);

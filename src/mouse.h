@@ -1,8 +1,9 @@
 #pragma once
 
 #include "define.h"
+#include "get_event.h"
 
-class MOUSE {
+class MOUSE : public GET_EVENT {
 public:
 	struct Click {
 		bool l; //lƒNƒŠƒbƒN

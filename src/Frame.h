@@ -18,6 +18,9 @@ protected:
 	virtual void main_draw();
 	//自フレーム以下の全子フレームのdraw関数実行
 	void childs_draw();
+	//フレーム追加時実行関数
+	virtual void when_create();
+
 public:
 	//変数
 	Frame *root; //rootフレームのポインタ
@@ -36,15 +39,20 @@ public:
 	WINDOW_INFO *win;
 
 	//関数宣言
-	//フレーム追加時実行関数
-	virtual void when_create();
 	//WINDOW_INFOポインタ代入
 	void set_win_info(WINDOW_INFO *set_win);
 	//自フレーム以下の全フレーム描画
 	void draw();
 	//自フレームのサイズに合わせて子フレームサイズ更新
 	void resize();
+	//子フレーム追加(使い方:add<type>();)
+	template <class T> T *add(){
+		T *new_frame = new(T);
+		childs.push_back(new_frame);
+		return new_frame;
+	}
 	//コンストラクタ
-	Frame(Frame *set_parent = nullptr, int set_length = 0, bool set_lock = 0, std::string set_name = "", std::string set_description = "");
-	Frame(bool set_mode, Frame *set_parent, std::string set_name = "", std::string set_description = "");
+	Frame(Frame *set_parent = nullptr);
+	//デストラクタ
+	~Frame();
 };

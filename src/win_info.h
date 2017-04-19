@@ -1,8 +1,10 @@
 #pragma once
 
-#include "define.h"
+#include <GL\glew.h>
+#include <GLFW\glfw3.h>
 #include <iostream>
 #include <Windows.h>
+#include "define.h"
 #include "mouse.h"
 #include "fps.h"
 
@@ -15,14 +17,16 @@ public:
 //変数宣言
 	POINT size; //ウィンドウサイズ
 	POINT b_size; //前フレームのウィンドウサイズ
-	RECT window; //ウィンドウ左上右下座標(デスクトップ基準)
 	HWND hwnd; //OpenGLの生成ウィンドウのハンドル
-	//double fps; //ウィンドウの描画フレームレート
+	GLFWwindow *gl_hwnd; //OpenGLの生成GLウィンドウのハンドル
 	MOUSE mouse; //マウスイベント保持クラス
-	FPS fps;
-	std::string title;
+	FPS fps; //フレームレート管理クラス
+	std::string title; //ウィンドウタイトル
 
 //関数宣言
+	//GLウィンドウハンドル設定関数
+	void set_GLhwnd(GLFWwindow *set_gl_hwnd);
+
 	//描画前ループ関数
 	void b_loop();
 

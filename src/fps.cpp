@@ -23,6 +23,9 @@ void FPS::Wait() {
 		);
 	}
 
+	//GPU負荷算出
+	load = 100.0 * (double)gap / (1000.0 / fps);
+
 	//現在のフレームレート取得
 	r_fps = 1000.0 / (double)(timeGetTime() - bef);
 
@@ -40,4 +43,8 @@ double FPS::GetFPS() {
 
 double FPS::GetSpeed() {
 	return speed;
+}
+
+double FPS::GetLoad() {
+	return load;
 }

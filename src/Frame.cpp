@@ -189,20 +189,22 @@ void Frame::get_index() {
 	}
 }
 
-Frame::Frame(Frame *set_parent = nullptr, int set_length = 0, bool set_lock = 0, std::string set_name = "", std::string set_description = "") {
+Frame::Frame(Frame *set_parent) {
 	reset();
+
 	parent = set_parent;
-	length = set_length;
-	lock = set_lock;
-	name = set_name;
-	description = set_description;
+	name = ""; //フレームの名称
+	description = ""; //フレーム内のUIの解説
+	mode = 0; //子フレームが縦並び=0,横並び=1
+	gap = 0; //子フレーム間同士の隙間(px単位)
+	length = 100; //全フレームが初期値サイズ時の自フレームのサイズ
+	lock = 0; //各子フレームの長さ(mode=0なら縦幅,mode=1なら横幅)の固定on/off
+
 	when_create();
 }
-Frame::Frame(bool set_mode, Frame *set_parent, std::string set_name = "", std::string set_description = "") {
-	reset();
-	mode = set_mode;
-	parent = set_parent;
-	name = set_name;
-	description = set_description;
-	when_create();
+
+Frame::~Frame() {
+	for (int i = 0; i < childs.size(); i++) {
+		delete childs[i];
+	}
 }
