@@ -44,7 +44,7 @@ public:
 	//自フレーム以下の全フレーム描画
 	void draw();
 	//自フレームのサイズに合わせて子フレームサイズ更新
-	void resize();
+	void resize(WindowRect set_pos = { -1.0, -1.0, -1.0, -1.0 });
 	//子フレーム追加(使い方:add<type>();)
 	template <class T> T *add(){
 		T *new_frame = new(T);

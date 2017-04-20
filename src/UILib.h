@@ -32,6 +32,8 @@ public:
 	void loop();
 	//描画関数
 	void render();
+	//リサイズ処理関数
+	void resize();
 	//終了時処理
 	void exit();
 };

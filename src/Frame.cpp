@@ -55,7 +55,18 @@ void Frame::set_win_info(WINDOW_INFO *set_win) {
 	}
 }
 
-void Frame::resize(){
+void Frame::resize(WindowRect set_pos = { -1.0, -1.0, -1.0, -1.0 }){
+	if (
+		set_pos.left == -1.0 ||
+		set_pos.top == -1.0 ||
+		set_pos.right == -1.0 ||
+		set_pos.bottom == -1.0
+	) {
+		set_pos = pos;
+	}
+	else {
+		pos = set_pos;
+	}
 	size.x = pos.right - pos.left;
 	size.y = pos.bottom - pos.top;
 	if (childs.size() != 0) {

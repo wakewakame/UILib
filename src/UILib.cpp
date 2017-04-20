@@ -103,6 +103,9 @@ void UILib::loop() {
 		//描画
 		render();
 
+		//リサイズ処理
+		resize();
+
 		//カラーバッファを入れ替える
 		glfwSwapBuffers(win.gl_hwnd);
 	}
@@ -115,7 +118,7 @@ void UILib::render() {
 	//std::cout << win.fps.GetLoad() << "%" << std::endl;
 	//std::cout << win.mouse.wheel << std::endl;
 	//std::cout << win.size.x << "," << win.size.y << std::endl;
-	std::cout << win.resize_flag << std::endl;
+	//std::cout << win.resize_flag << std::endl;
 
 	glLineWidth(10);
 	glColor4d(0.0, 1.0, 1.0, 1.0);
@@ -137,6 +140,12 @@ void UILib::render() {
 	glFlush();
 
 	return;
+}
+
+void UILib::resize() {
+	if(win.resize_flag){
+		window.resize();
+	}
 }
 
 void UILib::exit() {
