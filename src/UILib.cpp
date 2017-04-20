@@ -1,6 +1,6 @@
 #include "UILib.h"
 
-void UILib::resize() {
+void UILib::viewport_resize() {
 	if (f_exit) return;
 	//ウィンドウ全体をビューポートにする
 	glViewport(0, 0, win.size.x, win.size.y);
@@ -69,7 +69,7 @@ void UILib::init() {
 	glEnable(GL_POLYGON_SMOOTH); //面
 
 	//ウィンドウとビューポートの座標単位同期
-	resize();
+	viewport_resize();
 
 	//垂直同期のタイミングを待つ
 	glfwSwapInterval(1);
@@ -77,8 +77,15 @@ void UILib::init() {
 	//フレームレート設定
 	win.fps.SetFPS(30);
 
-	//rootフレーム初期化
+	///debug///
+	//フレーム追加
+	test[0] = window.add<Frame>();
+	test[1] = window.add<Frame>();
+	///debug///
+
+	//windowフレーム初期化
 	window.win = &win;
+	window_resize(1);
 
 	return;
 }
@@ -104,7 +111,7 @@ void UILib::loop() {
 		render();
 
 		//リサイズ処理
-		resize();
+		window_resize();
 
 		//カラーバッファを入れ替える
 		glfwSwapBuffers(win.gl_hwnd);
@@ -113,6 +120,9 @@ void UILib::loop() {
 }
 
 void UILib::render() {
+	window.draw();
+
+	///debug///
 	static int a = 50;
 	a = (a + (int)(1.0 * win.fps.GetSpeed())) % 100;
 	//std::cout << win.fps.GetLoad() << "%" << std::endl;
@@ -138,13 +148,17 @@ void UILib::render() {
 	glVertex2d(10.0 + (double)a, 20.0);
 	glEnd();
 	glFlush();
+	///debug///
 
 	return;
 }
 
-void UILib::resize() {
-	if(win.resize_flag){
-		window.resize();
+void UILib::window_resize(bool init) {
+	if(win.resize_flag || init){
+		//windowフレームサイズ同期
+		window.resize({ 0.0, 0.0, win.size.x, win.size.y });
+		//ウィンドウとビューポートの座標単位同期
+		viewport_resize();
 	}
 }
 

@@ -10,14 +10,27 @@ void Frame::reset() {
 	name = ""; //フレームの名称
 	description = ""; //フレーム内のUIの解説
 	mode = 0; //子フレームが縦並び=0,横並び=1
-	gap = 0.0; //子フレーム間同士の隙間(px単位)
-	length = 0.0; //全フレームが初期値サイズ時の自フレームのサイズ
+	gap = 3.0; //子フレーム間同士の隙間(px単位)
+	length = 1.0; //全フレームが初期値サイズ時の自フレームのサイズ
 	lock = 0; //各子フレームの長さ(mode=0なら縦幅,mode=1なら横幅)の固定on/off
-	lock_length = 0.0; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
+	lock_length = 1.0; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
 	return;
 }
 
 void Frame::main_draw() {
+	///debug///
+	//フレームの枠の描画
+	glLineWidth(1.0f);
+	glColor4d(1.0, 1.0, 1.0, 0.5);
+	glDisable(GL_POLYGON_SMOOTH);
+	glBegin(GL_LINE_LOOP);
+	glVertex2d(pos.left, pos.top);
+	glVertex2d(pos.left, pos.bottom);
+	glVertex2d(pos.right, pos.bottom);
+	glVertex2d(pos.right, pos.top);
+	glEnd();
+	glFlush();
+	///debug///
 	return;
 }
 
@@ -55,7 +68,7 @@ void Frame::set_win_info(WINDOW_INFO *set_win) {
 	}
 }
 
-void Frame::resize(WindowRect set_pos = { -1.0, -1.0, -1.0, -1.0 }){
+void Frame::resize(WindowRect set_pos){
 	if (
 		set_pos.left == -1.0 ||
 		set_pos.top == -1.0 ||

@@ -13,18 +13,20 @@ private:
 //変数宣言
 	//ウィンドウ情報保持変数初期化
 	WINDOW_INFO win;
-	//rootフレーム生成
-	Frame window;
 	//終了フラグ
 	bool f_exit;
 
 //関数宣言
 	//ウィンドウとビューポートを同期
-	void resize();
+	void viewport_resize();
 	//エラー発生時処理関数
 	bool error(bool val);
 
 public:
+//変数宣言
+	//rootフレーム生成
+	Frame window;
+
 //関数宣言
 	//初期化関数
 	void init();
@@ -32,10 +34,14 @@ public:
 	void loop();
 	//描画関数
 	void render();
-	//リサイズ処理関数
-	void resize();
+	//リサイズ処理関数(リサイズイベント以外で呼ぶときはinit=1)
+	void window_resize(bool init = 0);
 	//終了時処理
 	void exit();
+
+///debug///
+	Frame *test[100];
+///debug///
 };
 
 /*
