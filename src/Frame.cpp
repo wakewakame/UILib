@@ -4,6 +4,7 @@ void Frame::reset() {
 	//変数の初期化
 	root = nullptr; //rootフレームのポインタ
 	parent = nullptr; //親フレームのポインタ
+	childs = {};
 	index = 0;//同フレーム内の自フレームの割当番号(=0,1,2,3,...)
 	pos = { 0.0,0.0,0.0,0.0 }; //フレーム座標
 	size = { 0.0, 0.0 }; //フレームサイズ(末端フレームのみ代入)
@@ -11,9 +12,9 @@ void Frame::reset() {
 	description = ""; //フレーム内のUIの解説
 	mode = 0; //子フレームが縦並び=0,横並び=1
 	gap = 3.0; //子フレーム間同士の隙間(px単位)
-	length = 1.0; //全フレームが初期値サイズ時の自フレームのサイズ
+	length = { 100.0, 100.0 }; //全フレームが初期値サイズ時の自フレームのサイズ
 	lock = 0; //各子フレームの長さ(mode=0なら縦幅,mode=1なら横幅)の固定on/off
-	lock_length = 1.0; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
+	lock_length = { 0.0, 0.0 }; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
 	return;
 }
 
@@ -29,7 +30,6 @@ void Frame::main_draw() {
 	glVertex2d(pos.right, pos.bottom);
 	glVertex2d(pos.right, pos.top);
 	glEnd();
-	glFlush();
 	///debug///
 	return;
 }
@@ -42,6 +42,13 @@ void Frame::childs_draw() {
 }
 
 void Frame::when_create() {
+	//親フレームが存在したら
+	if (parent != nullptr) {
+		//親フレームの子フレーム配列に自フレーム追加
+		parent->childs.push_back(this);
+		//WINDOW_INFOを親フレームと同一のものにする
+		win = parent->win;
+	}
 	//自フレームのインデックス番号取得
 	get_index();
 	//自フレームのツリーのrootフレーム取得
@@ -49,11 +56,7 @@ void Frame::when_create() {
 	//rootフレーム以下のlength等再算出
 	root->get_length();
 	//rootフレーム以下のフレーム再配置
-	root->resize();
-	//WINDOW_INFOを親フレームと同一のものにする
-	if (parent != nullptr) {
-		win = parent->win;
-	}
+	root->resize(root->pos);
 }
 
 void Frame::set_win_info(WINDOW_INFO *set_win) {
@@ -100,21 +103,21 @@ void Frame::resize(WindowRect set_pos){
 				}
 				//右位置
 				if (childs[i]->lock) {
-					//固定サイズフレームの場合は割合変換不要
+					//固定サイズフレームorスクロール可フレームの場合は割合変換不要
 					childs[i]->pos.right =
 						childs[i]->pos.left +
-						childs[i]->length;
+						childs[i]->length.x;
 				}
 				else {
 					//非固定サイズフレームの場合は割合計算
 					childs[i]->pos.right =
 						childs[i]->pos.left +
 						Utility::Proportion(
-							childs[i]->length,
+							childs[i]->length.x,
 							0.0,
-							length - lock_length,
+							length.x - lock_length.x,
 							0.0,
-							size.x - lock_length
+							size.x - lock_length.x
 						);
 				}
 				//子フレーム位置設定
@@ -141,18 +144,18 @@ void Frame::resize(WindowRect set_pos){
 					//固定サイズフレームorスクロール可フレームの場合は割合変換不要
 					childs[i]->pos.bottom =
 						childs[i]->pos.top +
-						childs[i]->length;
+						childs[i]->length.y;
 				}
 				else {
 					//非固定サイズフレームの場合は割合計算
 					childs[i]->pos.bottom =
 						childs[i]->pos.top +
 						Utility::Proportion(
-							childs[i]->length,
+							childs[i]->length.y,
 							0.0,
-							length - lock_length,
+							length.y - lock_length.y,
 							0.0,
-							size.y - lock_length
+							size.y - lock_length.y
 						);
 				}
 				//子フレーム位置設定
@@ -170,25 +173,43 @@ void Frame::draw() {
 }
 
 void Frame::get_length() {
-	if (childs.size() != 0) {
-		length = 0.0; //全子フレームと全gapの和
-		lock_length = 0.0; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
-		//子フレームの個数分ループ
+	if (mode) {
+		length.x = 0.0;
+		lock_length.x = 0.0;
 		for (int i = 0; i < childs.size(); i++) {
 			//子フレームが子フレームを持っていた場合、再帰
-			if (childs.size() != 0) {
+			if (childs[i]->childs.size() != 0) {
 				childs[i]->get_length();
 			}
 			//親フレームの長さに子フレームの長さを足していく
-			length += childs[i]->length;
-			//もし子フレームが末端フレームで、固定サイズフレームの場合
+			length.x += childs[i]->length.x;
+			//もし子フレームが固定サイズフレームの場合
 			if (childs[i]->lock) {
-				lock_length += childs[i]->length;
+				lock_length.x += childs[i]->length.x;
 			}
 		}
 		//全gapを足す
-		length += gap * (double)(childs.size() + 1);
-		lock_length += gap * (double)(childs.size() + 1);
+		length.x += gap * (double)(childs.size() + 1);
+		lock_length.x += gap * (double)(childs.size() + 1);
+	}
+	else {
+		length.y = 0.0;
+		lock_length.y = 0.0;
+		for (int i = 0; i < childs.size(); i++) {
+			//子フレームが子フレームを持っていた場合、再帰
+			if (childs[i]->childs.size() != 0) {
+				childs[i]->get_length();
+			}
+			//親フレームの長さに子フレームの長さを足していく
+			length.y += childs[i]->length.y;
+			//もし子フレームが固定サイズフレームの場合
+			if (childs[i]->lock) {
+				lock_length.y += childs[i]->length.y;
+			}
+		}
+		//全gapを足す
+		length.y += gap * (double)(childs.size() + 1);
+		lock_length.y += gap * (double)(childs.size() + 1);
 	}
 	return;
 }
@@ -215,15 +236,7 @@ void Frame::get_index() {
 
 Frame::Frame(Frame *set_parent) {
 	reset();
-
 	parent = set_parent;
-	name = ""; //フレームの名称
-	description = ""; //フレーム内のUIの解説
-	mode = 0; //子フレームが縦並び=0,横並び=1
-	gap = 0.0; //子フレーム間同士の隙間(px単位)
-	length = 100.0; //全フレームが初期値サイズ時の自フレームのサイズ
-	lock = 0; //各子フレームの長さ(mode=0なら縦幅,mode=1なら横幅)の固定on/off
-
 	when_create();
 }
 

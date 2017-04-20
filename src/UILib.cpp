@@ -81,6 +81,16 @@ void UILib::init() {
 	//フレーム追加
 	test[0] = window.add<Frame>();
 	test[1] = window.add<Frame>();
+	test[1]->mode = 1;
+	test[2] = window.add<Frame>();
+	test[3] = test[1]->add<Frame>();
+	test[4] = test[1]->add<Frame>();
+	test[3]->mode = 1;
+	test[4]->mode = 0;
+	test[5] = test[3]->add<Frame>();
+	test[6] = test[3]->add<Frame>();
+	test[7] = test[4]->add<Frame>();
+	test[8] = test[4]->add<Frame>();
 	///debug///
 
 	//windowフレーム初期化
@@ -113,6 +123,9 @@ void UILib::loop() {
 		//リサイズ処理
 		window_resize();
 
+		//バッファに描画
+		glFlush();
+
 		//カラーバッファを入れ替える
 		glfwSwapBuffers(win.gl_hwnd);
 	}
@@ -121,42 +134,13 @@ void UILib::loop() {
 
 void UILib::render() {
 	window.draw();
-
-	///debug///
-	static int a = 50;
-	a = (a + (int)(1.0 * win.fps.GetSpeed())) % 100;
-	//std::cout << win.fps.GetLoad() << "%" << std::endl;
-	//std::cout << win.mouse.wheel << std::endl;
-	//std::cout << win.size.x << "," << win.size.y << std::endl;
-	//std::cout << win.resize_flag << std::endl;
-
-	glLineWidth(10);
-	glColor4d(0.0, 1.0, 1.0, 1.0);
-	glDisable(GL_POLYGON_SMOOTH);
-	glBegin(GL_QUADS);
-	glVertex2d(0.0, 0.0);
-	glVertex2d(100.0, 0.0);
-	glVertex2d(100.0, 100.0);
-	glVertex2d(0.0, 70.0);
-	glEnd();
-	glEnable(GL_POLYGON_SMOOTH);
-	glColor4d(1.0, 0.0, 0.0, 0.5);
-	glBegin(GL_LINES);
-	glVertex2d(10.0 + (double)a, 10.0);
-	glVertex2d(90.0 + (double)a, 10.0);
-	glVertex2d(90.0 + (double)a, 90.0);
-	glVertex2d(10.0 + (double)a, 20.0);
-	glEnd();
-	glFlush();
-	///debug///
-
 	return;
 }
 
 void UILib::window_resize(bool init) {
 	if(win.resize_flag || init){
 		//windowフレームサイズ同期
-		window.resize({ 0.0, 0.0, win.size.x, win.size.y });
+		window.resize({ 0.0, 0.0, (double)win.size.x, (double)win.size.y });
 		//ウィンドウとビューポートの座標単位同期
 		viewport_resize();
 	}

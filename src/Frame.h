@@ -33,9 +33,9 @@ public:
 	std::string description; //フレーム内のUIの解説
 	bool mode; //子フレームが縦並び=0,横並び=1
 	double gap; //子フレーム間同士の隙間(px単位)
-	double length; //全フレームが初期値サイズ時の自フレームのサイズ
+	WindowPoint length; //全フレームが初期値サイズ時の自フレームのサイズ
 	bool lock; //各子フレームの長さ(mode=0なら縦幅,mode=1なら横幅)の固定on/off
-	double lock_length; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
+	WindowPoint lock_length; //固定サイズの全子フレームと全gapの和(末端フレームは0を代入)
 	WINDOW_INFO *win;
 
 	//関数宣言
@@ -47,8 +47,7 @@ public:
 	void resize(WindowRect set_pos = { -1.0, -1.0, -1.0, -1.0 });
 	//子フレーム追加(使い方:add<type>();)
 	template <class T> T *add(){
-		T *new_frame = new(T);
-		childs.push_back(new_frame);
+		T *new_frame = new T(this);
 		return new_frame;
 	}
 	//コンストラクタ

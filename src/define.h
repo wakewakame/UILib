@@ -99,6 +99,22 @@ struct WindowPoint {
 	double y;
 
 //‰‰ŽZŽq
+	void operator += (WindowPoint a) {
+		this->x += a.x;
+		this->y += a.y;
+	}
+	void operator += (double a) {
+		this->x += a;
+		this->y += a;
+	}
+	void operator -= (WindowPoint a) {
+		this->x -= a.x;
+		this->y -= a.y;
+	}
+	void operator -= (double a) {
+		this->x -= a;
+		this->y -= a;
+	}
 	bool operator == (WindowPoint a) {
 		return (
 			this->x == a.x &&
@@ -122,6 +138,18 @@ struct WindowRect {
 	double bottom;
 
 //‰‰ŽZŽq
+	void operator += (WindowRect a) {
+		this->left += a.left;
+		this->top += a.top;
+		this->right += a.right;
+		this->bottom += a.bottom;
+	}
+	void operator -= (WindowRect a) {
+		this->left -= a.left;
+		this->top -= a.top;
+		this->right -= a.right;
+		this->bottom -= a.bottom;
+	}
 	bool operator == (WindowRect a){
 		return (
 			this->left == a.left &&
