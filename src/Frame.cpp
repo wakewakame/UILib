@@ -73,14 +73,11 @@ void Frame::set_win_info(WINDOW_INFO *set_win) {
 
 void Frame::resize(WindowRect set_pos){
 	if (
-		set_pos.left == -1.0 ||
-		set_pos.top == -1.0 ||
-		set_pos.right == -1.0 ||
-		set_pos.bottom == -1.0
+		set_pos.left >= 0.0 &&
+		set_pos.top >= 0.0 &&
+		set_pos.right >= 0.0 &&
+		set_pos.bottom >= 0.0
 	) {
-		set_pos = pos;
-	}
-	else {
 		pos = set_pos;
 	}
 	size.x = pos.right - pos.left;
