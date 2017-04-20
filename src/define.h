@@ -94,16 +94,50 @@ struct GraphPos {
 
 //ウィンドウ上の座標
 struct WindowPoint {
+//変数
 	double x;
 	double y;
+
+//演算子
+	bool operator == (WindowPoint a) {
+		return (
+			this->x == a.x &&
+			this->y == a.y
+		);
+	}
+	bool operator != (WindowPoint a) {
+		return (
+			this->x != a.x ||
+			this->y != a.y
+		);
+	}
 };
 
 //ウィンドウ上のサイズ
 struct WindowRect {
+//変数
 	double left;
 	double top;
 	double right;
 	double bottom;
+
+//演算子
+	bool operator == (WindowRect a){
+		return (
+			this->left == a.left &&
+			this->top == a.top &&
+			this->right == a.right &&
+			this->bottom == a.bottom
+		);
+	}
+	bool operator != (WindowRect a) {
+		return (
+			this->left != a.left ||
+			this->top != a.top ||
+			this->right != a.right ||
+			this->bottom != a.bottom
+			);
+	}
 };
 
 //グラフのプロパティ

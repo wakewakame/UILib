@@ -10,13 +10,25 @@
 
 //ウィンドウ情報保持変数
 class WINDOW_INFO {
+private:
+//変数宣言
+	//前フレーム時のウィンドウサイズ保持
+	WindowPoint b_size;
+
+//関数宣言
+	//ウィンドウリサイズイベント処理関数
+	static void resize_event(GLFWwindow *window, int width, int heigh);
+	
+	//ウィンドウリサイズフラグ処理
+	void resize_flag_event();
+
 public:
 //コンストラクタ
 	WINDOW_INFO();
 
 //変数宣言
-	POINT size; //ウィンドウサイズ
-	POINT b_size; //前フレームのウィンドウサイズ
+	WindowPoint size; //ウィンドウサイズ
+	bool resize_flag;//ウィンドウサイズ変更フラグ(ウィンドウリサイズ変更直後のフレームのみ1)
 	HWND hwnd; //OpenGLの生成ウィンドウのハンドル
 	GLFWwindow *gl_hwnd; //OpenGLの生成GLウィンドウのハンドル
 	MOUSE mouse; //マウスイベント保持クラス
@@ -30,9 +42,9 @@ public:
 	//GLウィンドウハンドル設定関数
 	void set_GLhwnd(GLFWwindow *set_gl_hwnd);
 
-	//描画前ループ関数
-	void b_loop();
+	//ウィンドウサイズ変更関数
+	void set_window_size(int width, int heigh);
 
-	//描画後ループ関数
-	void a_loop();
+	//ループ関数(描画前に置く)
+	void loop();
 };

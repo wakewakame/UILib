@@ -94,7 +94,7 @@ void UILib::loop() {
 		glfwPollEvents();
 
 		//イベント処理等
-		win.b_loop();
+		win.loop();
 
 		//画面初期化
 		glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
@@ -105,9 +105,6 @@ void UILib::loop() {
 
 		//カラーバッファを入れ替える
 		glfwSwapBuffers(win.gl_hwnd);
-
-		//待機処理等
-		win.a_loop();
 	}
 
 }
@@ -116,7 +113,9 @@ void UILib::render() {
 	static int a = 50;
 	a = (a + (int)(1.0 * win.fps.GetSpeed())) % 100;
 	//std::cout << win.fps.GetLoad() << "%" << std::endl;
-	std::cout << win.mouse.wheel << std::endl;
+	//std::cout << win.mouse.wheel << std::endl;
+	//std::cout << win.size.x << "," << win.size.y << std::endl;
+	std::cout << win.resize_flag << std::endl;
 
 	glLineWidth(10);
 	glColor4d(0.0, 1.0, 1.0, 1.0);
