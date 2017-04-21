@@ -28,11 +28,13 @@ void UILib::init() {
 	if (error(glfwInit() == GL_FALSE)) return;
 
 	//OpenGL Version 3.2 Core Profile を選択する
+	/*
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+	*/
 
 	//ウィンドウ生成
 	win.set_GLhwnd(
@@ -81,16 +83,22 @@ void UILib::init() {
 	//フレーム追加
 	test[0] = window.add<Frame>();
 	test[1] = window.add<Frame>();
-	test[1]->mode = 1;
+	
 	test[2] = window.add<Frame>();
 	test[3] = test[1]->add<Frame>();
 	test[4] = test[1]->add<Frame>();
-	test[3]->mode = 1;
-	test[4]->mode = 0;
+
 	test[5] = test[3]->add<Frame>();
 	test[6] = test[3]->add<Frame>();
 	test[7] = test[4]->add<Frame>();
 	test[8] = test[4]->add<Frame>();
+
+	test[1]->mode = 1;
+	test[3]->mode = 1;
+	test[4]->mode = 0;
+
+	window.orderliness();
+	window.orderliness();
 	///debug///
 
 	//windowフレーム初期化

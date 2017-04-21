@@ -6,6 +6,7 @@
 //フレーム基底クラス
 class Frame {
 protected:
+//管理系関数
 	//全変数初期化
 	void reset();
 	//子フレームから自フレームのlengthとlock_lengthを算出(子フレームが追加されるたびにrootフレームのこの関数を呼ぶ)
@@ -45,6 +46,8 @@ public:
 	void draw();
 	//自フレームのサイズに合わせて子フレームサイズ更新
 	void resize(WindowRect set_pos = { -1.0, -1.0, -1.0, -1.0 });
+	//rootフレーム以下のフレーム配置の整頓(フレームを追加し終わったら必ず実行)
+	void orderliness();
 	//子フレーム追加(使い方:add<type>();)
 	template <class T> T *add(){
 		T *new_frame = new T(this);

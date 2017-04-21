@@ -53,10 +53,6 @@ void Frame::when_create() {
 	get_index();
 	//自フレームのツリーのrootフレーム取得
 	get_root();
-	//rootフレーム以下のlength等再算出
-	root->get_length();
-	//rootフレーム以下のフレーム再配置
-	root->resize(root->pos);
 }
 
 void Frame::set_win_info(WINDOW_INFO *set_win) {
@@ -160,6 +156,14 @@ void Frame::resize(WindowRect set_pos){
 			}
 		}
 	}
+	return;
+}
+
+void Frame::orderliness() {
+	//rootフレーム以下のlength等再算出
+	root->get_length();
+	//rootフレーム以下のフレーム再配置
+	root->resize(root->pos);
 	return;
 }
 
