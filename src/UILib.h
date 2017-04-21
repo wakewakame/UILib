@@ -11,8 +11,6 @@
 class UILib {
 private:
 //変数宣言
-	//ウィンドウ情報保持変数初期化
-	WINDOW_INFO win;
 	//終了フラグ
 	bool f_exit;
 
@@ -24,6 +22,8 @@ private:
 
 public:
 //変数宣言
+	//ウィンドウ情報保持変数初期化
+	WINDOW_INFO win;
 	//rootフレーム生成
 	Frame window;
 
@@ -38,10 +38,6 @@ public:
 	void window_resize(bool init = 0);
 	//終了時処理
 	void exit();
-
-///debug///
-	Frame *test[100];
-///debug///
 };
 
 /*
