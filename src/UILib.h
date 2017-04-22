@@ -8,6 +8,10 @@
 #include "win_info.h"
 #include "Frame.h"
 
+///dubug///
+#include "FBOtest.h"
+///debug///
+
 class UILib {
 private:
 //変数宣言
@@ -26,6 +30,10 @@ public:
 	WINDOW_INFO win;
 	//rootフレーム生成
 	Frame window;
+
+	///debug///
+	FBOtest fbo;
+	///debug///
 
 //関数宣言
 	//初期化関数

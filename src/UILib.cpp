@@ -27,7 +27,7 @@ void UILib::init() {
 	//GLFW初期化
 	if (error(glfwInit() == GL_FALSE)) return;
 
-	//OpenGL Version 3.2 Core Profile を選択する
+	//OpenGL Version 3.0を指定
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
@@ -79,6 +79,11 @@ void UILib::init() {
 	window.win = &win;
 	window_resize(1);
 
+	///debug///
+	//FBO初期化
+	fbo.init(win.size);
+	///debug///
+
 	return;
 }
 
@@ -99,6 +104,10 @@ void UILib::loop() {
 		glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		///debug///
+		fbo.changeFBO();
+		///debug///
+
 		//描画
 		render();
 
@@ -107,6 +116,11 @@ void UILib::loop() {
 
 		//バッファに描画
 		glFlush();
+
+		///debug///
+		fbo.changeWindow();
+		fbo.DrawFBO();
+		///debug///
 
 		//カラーバッファを入れ替える
 		glfwSwapBuffers(win.gl_hwnd);

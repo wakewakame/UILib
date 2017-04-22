@@ -71,6 +71,9 @@
     <ClInclude Include="src\get_event.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="D:\Documents\Dropbox\C++\UILib\UILib\src\FBOtest.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

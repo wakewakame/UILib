@@ -143,6 +143,7 @@
     <ClInclude Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\define.h" />
     <ClInclude Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\UILib.h" />
     <ClInclude Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\win_info.h" />
+    <ClInclude Include="D:\Documents\Dropbox\C++\UILib\UILib\src\FBOtest.h" />
     <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\fps.h" />
     <ClInclude Include="src\Frame.h" />
