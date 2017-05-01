@@ -42,6 +42,9 @@
     <ClCompile Include="src\get_event.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="src\FBO.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\define.h">
@@ -71,11 +74,16 @@
     <ClInclude Include="src\get_event.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Documents\Dropbox\C++\UILib\UILib\src\FBOtest.h">
+    <ClInclude Include="src\FBO.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\memo.txt">
+      <Filter>リソース ファイル</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -27,7 +27,7 @@ void UILib::init() {
 	//GLFW‰Šú‰»
 	if (error(glfwInit() == GL_FALSE)) return;
 
-	//OpenGL Version 3.0‚ğw’è
+	//OpenGL Version 4.3‚ğw’è
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
