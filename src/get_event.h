@@ -1,7 +1,6 @@
 #pragma once
 
-#include <GL\glew.h>
-#include <GLFW\glfw3.h>
+#include "define.h"
 
 //イベント処理の基底クラス
 class GET_EVENT {

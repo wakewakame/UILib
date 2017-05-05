@@ -1,6 +1,5 @@
 #pragma once
 
-#include "define.h"
 #include "get_event.h"
 
 class MOUSE : public GET_EVENT {

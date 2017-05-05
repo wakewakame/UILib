@@ -12,9 +12,6 @@
 #include <GLFW/glfw3.h>
 GLFWwindow* window;
 
-#include "common/shader.hpp"
-#include "common/texture.hpp"
-
 
 int main(void)
 {

@@ -6,6 +6,8 @@
 #include "FBO.h"
 #include "GraphPara.h"
 
+/*
+
 //グラフ描画クラス
 class Graph : public Frame {
 private:
@@ -42,3 +44,4 @@ class Figure : public Frame {
 class WaveForm : public Frame {
 
 };
+*/

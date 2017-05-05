@@ -150,6 +150,7 @@
     <ClInclude Include="src\get_event.h" />
     <ClInclude Include="src\GraphPara.h" />
     <ClInclude Include="src\mouse.h" />
+    <ClInclude Include="src\UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\Users\大輝\Dropbox\C++\UILib\UILib\src\main.cpp" />
@@ -162,12 +163,10 @@
     <ClCompile Include="src\get_event.cpp" />
     <ClCompile Include="src\GraphPara.cpp" />
     <ClCompile Include="src\mouse.cpp" />
+    <ClCompile Include="src\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="src\memo.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

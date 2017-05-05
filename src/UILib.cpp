@@ -79,11 +79,6 @@ void UILib::init() {
 	window.win = &win;
 	window_resize(1);
 
-	///debug///
-	//FBO初期化
-	fbo.init(win.size);
-	///debug///
-
 	return;
 }
 
@@ -104,10 +99,6 @@ void UILib::loop() {
 		glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		///debug///
-		fbo.changeFBO();
-		///debug///
-
 		//描画
 		render();
 
@@ -116,11 +107,6 @@ void UILib::loop() {
 
 		//バッファに描画
 		glFlush();
-
-		///debug///
-		fbo.changeWindow();
-		fbo.DrawFBO();
-		///debug///
 
 		//カラーバッファを入れ替える
 		glfwSwapBuffers(win.gl_hwnd);

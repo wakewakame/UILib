@@ -1,16 +1,10 @@
 ﻿#pragma once
-#pragma comment(lib, "opengl32.lib")
 
-#include <GL\glew.h>
-#include <GLFW\glfw3.h>
-#include <iostream>
-#include <Windows.h>
+#include "define.h"
 #include "win_info.h"
+#include "FBO.h"
 #include "Frame.h"
-
-///dubug///
-#include "FBOtest.h"
-///debug///
+#include "UI.h"
 
 class UILib {
 private:
@@ -30,10 +24,6 @@ public:
 	WINDOW_INFO win;
 	//rootフレーム生成
 	Frame window;
-
-	///debug///
-	FBOtest fbo;
-	///debug///
 
 //関数宣言
 	//初期化関数
