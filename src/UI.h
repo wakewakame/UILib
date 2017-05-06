@@ -6,17 +6,22 @@
 #include "FBO.h"
 #include "GraphPara.h"
 
-/*
-
 //グラフ描画クラス
 class Graph : public Frame {
 private:
+	void main_draw();
+	std::vector<int> wave;
+	void glColor(double R, double G, double B, double A = 255.0) {
+		glColor4d(R / 255.0, G / 255.0, B / 255.0, A / 255.0);
+	}
+public:
+	Graph(Frame *set_parent = nullptr) : Frame(set_parent) {
+
+	}
+	//波形情報と描画範囲
+	graph grp;
 	//波形を塗りつぶすかどうか
 	bool fill_wave;
-	void main_draw();
-public:
-	graph g;
-	Graph(graph set_g, int set_length, Frame *set_parent = nullptr, bool set_lock = 0, bool set_fill_wave = 0, std::string set_name = "", std::string set_description = "");
 };
 
 //フェードグラフ描画クラス
@@ -44,4 +49,3 @@ class Figure : public Frame {
 class WaveForm : public Frame {
 
 };
-*/

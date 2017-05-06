@@ -48,10 +48,9 @@ public:
 	void resize(WindowRect set_pos = { -1.0, -1.0, -1.0, -1.0 });
 	//rootフレーム以下のフレーム配置の整頓(フレームを追加し終わったら必ず実行)
 	void orderliness();
-	//子フレーム追加(使い方:add<type>();)
+	//子フレーム追加(使い方:Frame *x = Frame::add<type>();)
 	template <class T> T *add(){
-		T *new_frame = new T(this);
-		return new_frame;
+		return new T(this);
 	}
 	//コンストラクタ
 	Frame(Frame *set_parent = nullptr);
